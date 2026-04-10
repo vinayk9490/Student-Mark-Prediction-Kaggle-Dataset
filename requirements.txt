@@ -1,0 +1,7 @@
+Pandas
+Numpy
+Seaborn
+Matplotlib
+Scikit-learn
+-e . 
+#this will automaticaaly connect to setup.py file and install the package in editable mode hence we use -e flag.

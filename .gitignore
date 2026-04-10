@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+/mlproject.egg-info/
+
 # Distribution / packaging
 .Python
 build/
