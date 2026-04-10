@@ -2,7 +2,6 @@ import os
 import sys
 from dataclasses import dataclass
 
-
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import r2_score
@@ -46,7 +45,49 @@ class ModelTrainer:
                 "Logistic Regression": LogisticRegression(),
             }
 
-            model_report: dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models)
+            params = {
+                "Random Forest": {
+                    "n_estimators": [50, 100, 200],
+                    "max_depth": [None, 5, 10],
+                    "min_samples_split": [2, 5],
+                },
+                "Gradient Boosting": {
+                    "n_estimators": [50, 100, 200],
+                    "learning_rate": [0.01, 0.05, 0.1],
+                    "max_depth": [3, 5, 7],
+                },
+                "AdaBoost Regressor": {
+                    "n_estimators": [50, 100, 200],
+                    "learning_rate": [0.01, 0.1, 1.0],
+                },
+                "CatBoost Regressor": {
+                    "iterations": [100, 200],
+                    "learning_rate": [0.01, 0.05, 0.1],
+                    "depth": [4, 6, 8],
+                },
+                "XGB Regressor": {
+                    "n_estimators": [50, 100, 200],
+                    "learning_rate": [0.01, 0.05, 0.1],
+                    "max_depth": [3, 5, 7],
+                },
+                "KNN Regressor": {
+                    "n_neighbors": [3, 5, 7, 9],
+                    "weights": ["uniform", "distance"],
+                },
+                "Decision Tree Regressor": {
+                    "max_depth": [None, 5, 10, 15],
+                    "min_samples_split": [2, 5, 10],
+                    "criterion": ["squared_error", "friedman_mse"],
+                },
+                "Linear Regression": {},
+                "Logistic Regression": {
+                    "C": [0.1, 1.0, 10.0],
+                    "max_iter": [100, 200, 500],
+                    "solver": ["lbfgs", "saga"],
+                },
+            }
+
+            model_report: dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models, params=params)
             #Get the best model score from the report
             best_model_score = max(sorted(model_report.values()))
             #Get the best model name from the report
