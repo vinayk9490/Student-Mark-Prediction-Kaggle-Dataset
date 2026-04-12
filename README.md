@@ -1,5 +1,6 @@
 # Student Performance Prediction — End-to-End Machine Learning Project
 
+
 A complete, production-style machine learning project that predicts a student's **math score** based on demographic and academic features. Covers every stage of an ML workflow: data ingestion, preprocessing, model training with hyperparameter tuning, and a **Flask web application** for real-time predictions.
 
 ---
